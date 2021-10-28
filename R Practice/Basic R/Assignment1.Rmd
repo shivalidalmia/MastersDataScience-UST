@@ -1,0 +1,256 @@
+---
+title: "SEIS 631: Assignment 1"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Navigating R and RStudio (Basics)
+
+The goal of this assignment is to introduce you to [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/), which you’ll be using throughout the course both to learn the concepts discussed in the class and also to analyze real data and come to informed conclusions. *R* is the name of the programming language itself and *RStudio* is an IDE (integrated development environment), a.k.a a convenient interface. 
+
+For this assignment, follow along by typing the commands as they appear in this document. Also answer any questions. You will submit your answers to the questions in this document through the online quiz (which contains the exact same questions). When you are done, you should also save your R history file. Instructions on doing that appear at the end of the document.
+
+---
+
+We need to build some basic fluency in R. We begin with the fundamental building blocks of R and RStudio: the
+interface, reading in data, and basic commands.  Here is a picture of the way RStudio will probably look when you first open it. Note that this can be customized. I have rearranged the panes on the computer I use in class.
+
+![RStudioConsole](rstudiodesktop.png)
+ 
+The panel in the upper right contains your workspace (the console) as well as a history of the commands that you’ve previously entered. Any plots that you generate will show up in the panel in the lower right corner.
+
+The panel on the left is where the action happens. It’s called the console. Every time you launch RStudio, it will have the same text at the top of the console telling you the version of R that you’re running. Below that information is the prompt. As its name suggests, this prompt is really a request, a request for a command. Initially, interacting with R is all about typing commands and interpreting the output. These commands and their syntax have evolved over decades and now provide what many users feel is a fairly natural way to access data and organize, describe, and invoke statistical computations.
+
+To get you started, we first need to check the working directory, i.e. the directory (or file folder) in which you are currently working. Enter the following command at the R prompt (i.e. right after > on the console).
+
+```{r, eval=FALSE}
+getwd()
+```
+
+This should display the directory in which you are currently working. You can change the current working directory by using `setwd()` and specifying the directory as follows: 
+
+```{r, eval = FALSE}
+setwd("C:/Users/me/Desktop")
+```
+
+Note that `"C:/Users/me/Desktop"` will be different on your computer. It can be any directory path you want. For help finding the full directory path on your computer, google “find directory path” and add your computer/OS.
+
+Alternatively, you can change the working directory using the Files tab from the bottom right panel of the RStudio interface. You can navigate to the desired location on the computer. After that, under the More option, select the Set as Working Directory option. 
+
+For this assignment, you should make sure that your working directory also contains the `present.RData` file that contains the data.  (Download this from Canvas if you haven’t already.)
+
+Load the data using the following command, 
+
+```{r}
+load("present.RData")
+```
+
+OR
+
+```{r, eval = FALSE}
+load(file.choose())
+```
+
+(The `file.choose()` command opens a pop up window that lets you select a file like you would in other programs. This is often easier than finding and typing the directory path (which is prone to typing errors), but it cannot be automated.)
+
+The data is stored in a data frame called `present`. These data are about the number of boys and girls born in the US each year. You should see that the environment area in the upper right-hand corner of the RStudio window now lists a data set called present that has 63 observations on 3 variables. As you interact with R, you will create a series of objects. Sometimes you load them as we have done here, and sometimes you create them yourself as the byproduct of a computation or some analysis you have performed.
+
+## The Data 
+
+The `present` data set refers to the number of male and female births in the United States. The data set contains the data for all years from 1940 to 2002. We can take a look at the data by typing its name into the console as follows,
+
+```{r, eval = FALSE}
+present
+```
+
+
+What you should see are four columns of numbers, each row representing a different year: the first entry in each row is simply the row number (an index we can use to access the data from individual years if we want), the second is the year, and the third and fourth are the numbers of boys and girls born that year, respectively. Use the scrollbar on the right side of the console window to examine the complete data set.  The first several lines of what you should see are shown below.
+
+```{r, echo=FALSE}
+head(present)
+```
+
+When the data are displayed in the console, note that the row numbers in the first column are not part of the `present` data set. R adds them as part of its printout to help you make visual comparisons. You can think of them as the index that you see on the left side of a spreadsheet. In fact, the comparison to a spreadsheet will generally be helpful. R has stored the data in a kind of spreadsheet or table called a *data frame*.
+
+You can see the dimensions of this data frame by typing:
+
+```{r}
+dim(present)
+```
+The output for this, [1] 63 3, indicates that there are 63 rows and 3 columns (we’ll get to what the [1] means in a bit), just as it says next to the object in your workspace. You can see the names of these columns (or variables) by typing:
+
+```{r}
+names(present)
+```
+
+* Question 1: How many variables are included in this data set?
+
+* Question 2: What years are included in this dataset?
+
+You should see that the data frame contains the columns `year`, `boys`, and `girls`. At this point, you might notice that many of the commands in R look a lot like functions (or methods); that is, invoking R commands means supplying a function with some number of arguments (or parameters). The `dim` and `names` commands for example, each took a single argument, the name of a data frame.
+
+You can examine any stored data by simply typing its name in the console as we did above; however, this can require quite a bit of scrolling if the data set it large or has many variables or both and can ultimately be overwhelming. One advantage of RStudio is that it comes with a built-in data viewer. Click on the name `present` in the environment window that lists the objects in your workspace. This will bring up an alternative display of the counts in the upper left window. You can close the data viewer by clicking on the “x” in the upper lefthand corner.  Alternatively, you can also use the `View()` command by typing 
+
+```{r, eval = FALSE}
+View(present)
+```
+
+Either method displays the data in the source pane. You can organize the panes in Pane Layout section of the RStudio preferences.  
+
+## Some Exploration
+
+Let’s start to examine the data a little more closely. We can access the data in a single column of a data frame separately using a command like,
+
+```{r, eval = FALSE}
+present$boys
+```
+
+This command will only show the number of boys born each year. Here is some of the output
+
+```{r, echo = FALSE}
+present$boys[1:24]
+```
+
+* Question 3: What command would you use to view just the counts of girls born each year?
+
+Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 63 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called vectors; they represent a set (or list) of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, 1211684 follows [1], indicating that 1211684 is the first entry in the vector. Similarly if [43] starts a line, then that would mean the first number on that line would represent the 43rd entry in the vector.
+
+R has some powerful functions for making graphics. We can create a simple plot of the number of girls born per year with the command, 
+
+```{r}
+plot(x = present$year, y = present$girls)
+```
+
+By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the “Plots” tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with two arguments separated by a comma. The first argument in the plot function specifies the variable for the x-axis and the second for the y-axis. If we wanted to connect the data points with lines, we could add a third argument, the letter “l” for line, 
+
+```{r, eval = FALSE}
+plot(x = present$year, y = present$girls, type = "l")
+```
+
+Also note that ‘x =’ and ‘y =’ can be omitted from this function. In that case, the function treats the first argument as x and the second as y. Try both of these variations on your own.
+ 
+* Question 4: Is there an apparent trend in the number of girls born over the years? How would you describe it?
+
+You might wonder how you are supposed to know that it was possible to add that third argument. Thankfully, R documents all of its functions extensively. To read what a function does and learn the arguments that are available to you, just type in a question mark followed by the name of the function that you’re interested in. Try the following.
+
+```{r, eval = FALSE}
+?plot
+```
+
+Notice that the help file replaces the plot in the lower right panel. You can toggle between plots and help files using the tabs at the top of that panel.
+
+Now, suppose we want to plot the total number of births. To compute this, we could use the fact that R is really just a big calculator. To see the total number of births in 1940, we can type a mathematical expressions like, 
+
+```{r}
+1211684 + 1148715
+```
+
+We could repeat this once for each year, but there is a faster way. If we add the vector for births for boys and girls, R will compute all sums simultaneously.
+
+```{r, eval = FALSE}
+present$boys + present$girls
+```
+
+Try it. What you will see are 63 numbers (in that packed display, because we aren’t looking at a data frame here), each one representing the sum we’re after. Take a look at a few of them and verify that they are right. Therefore, we can make a plot of the total number of births per year with the command, 
+
+```{r}
+plot(present$year, present$boys + present$girls, type = "l")
+```
+
+As mentioned above, this time note that we left out the names of the first two arguments. We can do this because the help file shows that the default for plot is for the first argument to be the x-variable and the second argument to be the y-variable.
+
+Anytime we want to work with the total births in a year we can always type `present$boys + present$girls`, but we might also want to store that sum to make it easier to use in the future.  We can do these in two ways.  First we can just assign the sum to a variable like this
+
+```{r, eval = FALSE}
+totalbirths <- present$boys + present$girls
+```
+
+Note that `<-` is the assignment operator in R. You can think of it as an arrow pointing left.  Something like `x <- 5` would be read “assign the value of 5 to the name x.”  Alternatively you could use `x = 5` and `5 -> x` (note that the arrow is reversed in the last example).  There are subtle difference between these, but all accomplish the same thing in nearly all cases we will encounter in this course. Convention and popular style guids prefer the `x <- 5` version, however.
+
+The previous code ‘names’ the sum of `boy` and `girl` births, `totalbirths`.  The name can be whatever you want (with some exceptions for special characters and already used words).  Calling it `totalbirths` makes it very clear what the variable contains, namely a vector of the total number of births in each year, but it is a lot to type. You might prefer something shorter like `tb`.  How you name your variables and dataframes is up to you.
+
+Alternatively, we could also add these data directly to the present data frame itself.  This is done simply by assigning the sum (just like above) to a new variable within the data frame, which we create with the `$` operator like this
+
+```{r}
+present$total <- present$boys + present$girls
+```
+
+Before typing this line, present contained 3 columns (variables) and did not contain a “total” column, but this line of code 1) creates a new variable (or column) called “total” and 2) assigns values to that column by adding `present$boys + present$girls`.  Note that “total” was an arbitrary (but appropriate) name. We could have named the column anything.  
+
+Use the `View()` command or click on present in the environment window to confirm that present now has a fourth column called total.
+
+* Question 5: Check out the help file of which.max() function, and find out in what year did we see the most total number of births in the U.S.?
+
+We can compute the ratio of the number of boys to the number of girls born in 1940 with,
+
+```{r, eval = FALSE}
+1211684/1148715
+```
+
+or we can act on the complete vectors with the expression
+
+```{r, eval = FALSE}
+present$boys/present$girls
+```
+
+The proportion of newborns that are boys for 1940 can be computed as
+
+```{r, eval = FALSE}
+1211684/(1211684 + 1148715)
+```
+
+or this may also be computed for all years simultaneously:
+
+```{r, eval = FALSE}
+present$boys/(present$boys + present$girls)
+```
+
+Or
+
+```{r, eval = FALSE}
+present$boys/(present$total)
+```
+
+Note that with R, you need to be conscious of the order of operations. In the first of the above expression, we wanted to divide the number of boys by the total number of newborns, so we had to use parentheses. Without them, R will first do the division, then the addition, giving you something that is not a proportion.
+
+* Question 6a: Now, make a plot of the proportion of boys over time, and based on the plot determine if the following statement is true or false: *The proportion of boys born in the US has decreased over time.*
+
+* Question 6b: Do you think the trend you saw in question 6a is a meaningful one or just represent random variation (or noise in the data)?
+
+Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, `>`, less than, `<`, and equality, `==`. For example, we can ask if boys outnumber girls in each year with the expression,
+
+```{r, eval = FALSE}
+present$boys > present$girls
+```
+
+This command returns 63 values of either TRUE if that year had more boys than girls, or FALSE if that year did not. This output shows a different kind of data than we have considered so far. In the present data frame our values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create logical data, data where the values are either TRUE or FALSE. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.
+
+* Question 7: How many TRUEs did you see after typing the previous expression?
+
+TRUE/FALSE (Boolean) data in R can actually be treated as a number as well. R stores true values as 1 and false values as 0. Run the following code in R
+
+```{r, eval = FALSE}
+sum(present$boys > present$girls)
+```
+
+* Question 8: How does the output for this code compare to your answer for Question 7? What does this code do?
+
+Now answer the following questions based on what you have learned so far.
+
+* Question 9 [MULTIPLE CHOICE]: Make a plot that displays the boy-to-girl ratio for every year in the data set. What do you see?
+  + (a) There appears to be no trend in the boy-to-girl ratio from 1940 to 2002.
+  + (b) There is initially an increase in boy-to-girl ratio, which peaks around 1960. After 1960 there is a decrease in the boy-to-girl ratio, but the number begins to increase in the mid 1970s.
+  + (c) There is initially a decrease in the boy-to-girl ratio, and then an increase between 1960 and 1970, followed by a decrease.
+  + (d) The boy-to-girl ratio has increased over time.
+  + (e) There is an initial decrease in the boy-to-girl ratio born but this number appears to level around 1960 and remain constant since then
+
+
+* Question 10: Calculate the absolute differences between number of boys and girls born in each year, and determine which year out of the present data had the biggest absolute difference in the number of girls and number of boys born?
+
+## Submission:
+
+Submit your answers to these questions through the online quiz on Canvas. 
+
+You should also save your Rhistory file which contains a history of all the commands you used in R in case you have any issues. You can create this file by typing `savehistory(file = "Assign1.Rhistory")`. You do not need to submit this, but keep it for your records.
+
