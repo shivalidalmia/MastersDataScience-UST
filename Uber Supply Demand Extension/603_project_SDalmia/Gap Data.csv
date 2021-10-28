@@ -1,0 +1,6 @@
+,Request Time Slot,Total Demand,Total Supply,Total Gap,Demand_From_Airport,Supply_To_Airport,Gap_From_Airport,Demand_From_City,Supply_To_City,Gap_From_City
+0,Early morning,1827,740,1087,517,344,173,1310,396,914
+1,Peak morning,1268,559,709,301,243,58,967,316,651
+2,Noon,810,491,319,339,225,114,471,266,205
+3,Evening,1893,642,1251,1457,312,1145,436,330,106
+4,Night,947,399,548,624,203,421,323,196,127
