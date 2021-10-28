@@ -1,0 +1,173 @@
+class Node:
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+
+    def setData(self, data):
+        self.data = data
+
+    def setNext(self, next):
+        self.next = next
+
+    def getData(self):
+        return self.data
+
+    def getNext(self):
+        return self.next
+
+
+class MyLinkedList:
+
+    def __init__(self, head=None):
+        """
+        Initialize your data structure here.
+        """
+        self.head = head
+        self.size = 0
+
+    def get(self, index: int) -> int:
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+        """
+        value = ''
+        if index < self.size:
+            curr_index = 0
+            found = False
+            curr = self.head
+            prev = None
+            while not found:
+                if index == curr_index:
+                    found = True
+                    value = curr.getData()
+                else:
+                    prev = curr
+                    curr = curr.getNext()
+                    curr_index += 1
+        else:
+            return -1
+
+        return value
+
+    def addAtHead(self, val: int) -> None:
+        """
+        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+        """
+        if self.size == 0:
+            node = Node(val)
+            self.head = node
+            self.size += 1
+        else:
+            node = Node(val,self.head)
+            self.head = node
+            self.size += 1
+
+    def addAtTail(self, val: int) -> None:
+        """
+        Append a node of value val to the last element of the linked list.
+        """
+        index=0
+        prev = None
+        curr = self.head
+        if self.size == 0:
+            node = Node(val, None)
+            self.head = node
+        else:
+            while self.size-index != 1:
+                index += 1
+                prev = curr
+                curr = curr.getNext()
+
+            node = Node(val,None)
+            curr.setNext(node)
+
+        self.size += 1
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        """
+        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        """
+        curr = self.head
+        prev = None
+        curr_index = 0
+        inserted = False
+        if index<=self.size:
+            while not inserted:
+                if curr_index == index:
+                    if index == 0:
+                        node = Node(val, curr)
+                        self.head = node
+                    else:
+                        node = Node(val,curr)
+                        prev.setNext(node)
+                    self.size += 1
+                    inserted = True
+                else:
+                    prev = curr
+                    curr = curr.getNext()
+                    curr_index += 1
+        elif index == self.size:
+            self.addAtTail(val)
+        else:
+            print("Index greater than length of linked list")
+
+    def deleteAtIndex(self, index: int) -> None:
+        """
+        Delete the index-th node in the linked list, if the index is valid.
+        """
+        if index <self.size:
+            curr_index = 0
+            deleted = False
+            curr = self.head
+            prev = None
+            while not deleted:
+                if index == curr_index:
+                    if index == 0:
+                        self.head = curr.getNext()
+                    else:
+                        prev.setNext(curr.getNext())
+                    self.size -= 1
+                    deleted = True
+                else:
+                    prev = curr
+                    curr = curr.getNext()
+                    curr_index += 1
+
+    def __str__(self):
+
+        index = 0
+        curr = self.head
+        value = ''
+        while index<=self.size-1:
+            value = value + str(curr.getData()) + '\t'
+            curr = curr.getNext()
+            index += 1
+
+        return value
+
+# Your MyLinkedList object will be instantiated and called as such:
+'''
+["MyLinkedList","addAtIndex","addAtIndex","addAtIndex","get"]
+[[],[0,10],[0,20],[1,30],[0]]
+'''
+obj = MyLinkedList()
+
+# obj.addAtHead(1)
+# print(obj)
+# obj.addAtHead(5)
+# print(obj)
+# obj.addAtTail(4)
+# print(obj)
+obj.addAtIndex(0,10)
+print(obj)
+
+obj.addAtIndex(0,20)
+print(obj)
+
+obj.addAtIndex(1,30)
+print(obj)
+
+obj.deleteAtIndex(0)
+print(obj)
+
+param_1 = obj.get(0)
+print(param_1)

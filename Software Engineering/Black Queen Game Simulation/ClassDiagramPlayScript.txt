@@ -1,0 +1,41 @@
+@startuml
+
+class Commander {
+	trump
+	partner_card1
+	partner_card2
+	Please_start_a_game_of_for_players()
+	Please_record_the_trump_and_partners_cards()
+	Please_save_the_bidding_points_for_each_player()
+}
+
+class Manager {
+	card_played
+	no_of_players
+	Host_a_game_of_Black_Queen_for_players()
+	Please_ask_the_host_to_start_bidding_round()
+	Pass_the_bid_for player()
+	Bid_points_for_player()
+	Please_start_the_game()
+	Please_ask_Player_to_play_the_card()
+	Store the card_played()
+	Please_continue_with_next_round()
+	Announce_the_winner_of_the_game()
+}
+
+class Clerk {
+	bid_points
+	Please_store_the_number_of_points_for_each_player_and_display_them_on_the_scoreboard()
+}
+
+class Abacus {
+	total_player_points
+	Please_calculate_the_total_number_of_points_for_each_player_and_return()
+}
+
+Manager-->Commander
+Commander-->Clerk
+Commander-->Abacus
+Commander-->Manager
+
+@enduml

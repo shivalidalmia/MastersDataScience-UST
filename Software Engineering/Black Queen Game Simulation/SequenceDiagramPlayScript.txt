@@ -1,0 +1,57 @@
+@startuml
+
+actor Player1
+actor Player2
+actor Player3
+actor Player4
+actor Player5
+actor Player6
+
+Player3->Manager:I_want_to_host_a_game_of_Black_Queen_for_6_players.
+Manager->Commander:Please_start_a_game_of_6_players.
+Commander->Manager:Game_table_is_ready._Please_ask_the_host_to_start_bidding_round.
+Manager->Player3:Please_start_the_bidding_process.
+Player3-->Manager:I_want_to_pass_my_bid.
+Player2-->Manager:I_want_to_bid_75_points.
+Player1-->Manager:I_want_to_bid_150_points.
+Player4-->Manager:I_want_to_bid__90_points.
+Player5-->Manager:I_want_to_pass_my_bid.
+Player6-->Manager:I_want_to_bid_75_points.
+Manager->Commander:Please_save_the_bidding_points_for_each_player.[Player3->0..._Player6->75]
+Commander->Manager:The_scoreboard_is_ready._Please_start_the_game.
+Manager->Player1:As_you_are_the_highest_bidder,_it_is_your_turn._Please_announce_the_trump_and_two_cards_for_declaring_partners.
+Player1-->Manager:The_trump_is_‘Spade’_and_players_with_‘Ace_of_spade’_and_‘King_of_heart’_are_my_partners.
+Manager->Commander:Please_record_the_trump_as_‘spade’_and_partner’s_card_as_‘Ace_of_spade’_and_‘King_of_heart’.
+Commander->Manager:Please_ask_Player1_to_play_the_card.
+Manager->Player1:Please_play_the_card.
+Player1-->Manager:I_have_played_‘5_of_spade’.
+Manager->Player2:Your_turn_please_play_the_card.
+Player2-->Manager:I_have_played_‘King_of_spade’.
+Manager->Player3:Your_turn_please_play_the_card.
+Player3-->Manager:I_have_played_‘Ace_of_spade’.
+Manager->Player4:Your_turn_please_play_the_card.
+Player4-->Manager:I_have_played_‘Queen_of_spade’.
+Manager->Player5:Your_turn_please_play_the_card.
+Player5-->Manager:I_have_played_‘3_of_spade’.
+Manager->Player6:Your_turn_please_play_the_card.
+Player6-->Manager:I_have_played_‘King_of_spade’.
+Manager->Player1:You_win_this_round_and_this_hand_is_yours.
+Manager->Commander:One_round_is_finished._Please_calculate_and_store_the_number_of_points_for_each_player.
+Commander->Abacus:Please_calculate_the_number_of_points_for_each_player_and_return.
+Abacus-->Commander:The_number_of_points_for_each_player_are_these_[Player1->55,...,Player6->0].
+Commander->Clerk:Please_store_the_number_of_points_for_each_player_for_the_last_pass_and_display_them_on_the_scoreboard_[Player1->55...,Player6->0].
+Clerk->Commander:The_points_are_stored_and_displayed_on_the_scoreboard_for_the_last_pass.
+Commander->Manager:Please_continue_with_the_next_round.
+Manager->Player1:Your_turn_please_play_the_card.
+Player1-->Manager:I_have_played_‘5_of_hearts’.
+Manager->Player2:Your_turn_please_play_the_card.
+Player2-->Manager:I_have_played_‘Ace_of_hearts’.
+Manager->Commander:All_rounds_are_finished._Please_calculate_the_points_for_each_player,_store_them,_and_display_them_on_the_scoreboard.
+Commander->Abacus:Please_calculate_the_total_number_of_points_for_each_player_and_return.
+Abacus-->Commander:The_total_number_of_points_for_each_player_are_these_[Player1->150...,Player6->0].
+Commander->Clerk:Please_store_the_number_of_points_for_each_player_after_the_final_round__and_display_them_on_the_scoreboard_[Player1->150...,Player6->0].
+Clerk-->Commander:The_total_points_are_stored_and_displayed_on_scoreboard_for_this_game.
+Commander-->Manager:Player1_is_the_winner_of_this_game_with_150_points.
+Manager-->Player1:you_win_this_game_with_150_points._Congratulations!!!
+
+@enduml
