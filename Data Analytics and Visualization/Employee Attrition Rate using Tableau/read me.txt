@@ -1,0 +1,45 @@
+
+Why are some of the employees leaving ?  Fields in the dataset include:
+
+    Satisfaction Level of the employee
+    Last evaluation received
+    Number of projects
+    Average monthly hours
+    Time spent at the company
+    Whether they have had a work accident
+    Whether the employee has left
+    Whether they have had a promotion in the last 5 years
+    Department
+    Salary
+
+Factors affecting Left:
+Sheet1-Sheet7: Employees who left the company had low satisfaction level(0.4$), worked for more hours(207.419), spent more time in the company(3.8), low promotion rate(0.005) as compared to those who stayed in the company.
+
+Sheet8: Out of 15000 employees 3571 left the company which is approx 24% of total employees. This atrition rate is high and a matter of concern for the company.
+
+Sheet9: Most of the emplyess are working in 3-5 projects.
+
+Shee10: Most of the employees have 3-4 years of experience. Their is a huge gap between 3years and 4years experience employees.
+
+Sheet11: Sales department has the highest number of employees followed by technical and support. 
+
+Sheet12: Majority employees are getting salaries in low and medium range only.
+
+Sheet13: Employees who have more than 5 projects tends to leave the company. So a high workload could be a reason for leaving.
+
+Sheet14: 
+
+
+Following features are most influencing a person to leave the company:
+
+Promotions: Employees are far more likely to quit their job if they haven't received a promotion in the last 5 years.
+Time with Company: Here, The three-year mark looks like a time to be a crucial point in an employee's career. Most of them quit their job around the three-year mark. Another important point is 6-years point, where the employee is very unlikely to leave.
+Number Of Projects: Employee engagement is another critical factor to influence the employee to leave the company. Employees with 3-5 projects are less likely to leave the company. The employee with less and more number of projects are likely to leave.
+Salary: Most of the employees that quit among the mid or low salary groups.
+
+
+
+
+
+
+    
