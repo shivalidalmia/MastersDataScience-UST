@@ -1,0 +1,13 @@
+SVN command	Git command	Git behavior
+status		status	Report the state of working tree
+add	add	Required for each path before making a commit
+commit	commit	Store prepared changes in local revision history
+rm, delete	rm	Prepare paths for deletion in next commit
+move	mv	Prepare relocated content for next commit
+checkout	clone	Acquire the entire history of a project locally for the first time
+ 	branch	Create local context for commits
+ 	merge	Join branch histories and changes to working tree
+ 	log	No network required
+ 	push	Upload commit history to GitHub/centralized Git host
+ 	pull	Download and integrate GitHub repository history with local on
+ 	fetch	Download GitHub repository history with no other action
