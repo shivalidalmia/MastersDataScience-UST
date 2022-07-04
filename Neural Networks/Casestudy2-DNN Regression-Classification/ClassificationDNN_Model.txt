@@ -1,0 +1,48 @@
+MODEL1
+*   Layers: 3 (Layer1 - 6 units, Layer2 - 6 units, Layer3 - 4 unit)
+*   Activation function: relu (hidden layers), softmax (output layer)
+*   Optimizer: adam
+*	Epochs: 100
+Model Evaluation
+5/5 [==============================] - 0s 3ms/step - loss: 0.3323 - accuracy: 0.9067
+[0.33229076862335205, 0.9066666960716248]
+
+MODEL2
+*   Layers: 3 (Layer1 - 6 units, Layer2 - 6 units, Layer3 - 4 unit)
+*   Activation function: relu (hidden layers), softmax (output layer)
+*   Adding dropout of 0.1 for layer2
+*   Optimizer: adam
+*	Epochs: 100
+Model Evaluation
+5/5 [==============================] - 0s 2ms/step - loss: 0.3705 - accuracy: 0.8867
+[0.3705131411552429, 0.8866666555404663]
+
+MODEL3
+*   Layers: 3 (Layer1 - 6 units, Layer2 - 6 units, Layer3 - 4 unit)
+*   Activation function: relu (hidden layers), softmax (output layer)
+*   Adding dropout of 0.1 for layer2
+*   Optimizer: sgd
+*	Epochs: 100
+Model Evaluation
+5/5 [==============================] - 0s 3ms/step - loss: 1.0084 - accuracy: 0.5000
+[1.008426547050476, 0.5]
+
+MODEL4
+*   Layers: 3 (Layer1 - 6 units, Layer2 - 6 units, Layer3 - 4 unit)
+*   Activation function: relu (hidden layers), softmax (output layer)
+*   Optimizer: sgd (Learning rate:0.001 and momentum=0.9)
+*	Epochs: 100
+Model Evaluation
+5/5 [==============================] - 0s 2ms/step - loss: 0.4991 - accuracy: 0.7933
+[0.49910569190979004, 0.7933333516120911]
+
+MODEL5
+*   Layers: 3 (Layer1 - 6 units, Layer2 - 6 units, Layer3 - 6units, Layer3 - 4 units)
+*   Activation function: relu (hidden layers), softmax (output layer)
+*   Adding dropout of 0.1 after each hidden layer
+*   Optimizer: adam
+*	Epochs: 100
+Model Evaluation
+5/5 [==============================] - 0s 3ms/step - loss: 0.3522 - accuracy: 0.8733
+[0.35220661759376526, 0.8733333349227905]
+
